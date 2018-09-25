@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="461" started-at="2018-09-23T17:40:24Z" finished-at="2018-09-23T17:40:24Z">
+    <groups>
+    </groups>
+    <test name="Default test" duration-ms="461" started-at="2018-09-23T17:40:24Z" finished-at="2018-09-23T17:40:24Z">
+      <class name="com.sdet.dataBaseValidation">
+        <test-method status="PASS" signature="mainq1()[pri:0, instance:com.sdet.dataBaseValidation@57fffcd7]" name="mainq1" duration-ms="421" started-at="2018-09-23T17:40:24Z" finished-at="2018-09-23T17:40:24Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- mainq1 -->
+      </class> <!-- com.sdet.dataBaseValidation -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>

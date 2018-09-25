@@ -1,0 +1,148 @@
+<html>
+<head>
+<style>
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+}
+input
+{
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+}
+
+input:focus:focus 
+{
+    background-color: #ddd;
+    outline: none;
+}
+
+button
+ {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+}
+
+button:hover {
+    opacity:10;
+}
+
+
+ .signupbtn 
+ {
+  float: left;
+  width: 50%;
+}
+</style>
+ <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+ <script>
+ 
+$( document ).ready(function() 
+{
+	 duv=document.getElementById("demo");
+	 duv.innerHTML="<table border='1'><tr><th>Playername</th><th>Category</th><th>highestscore</th><th>bestfigure</th><th>Team</th></tr>";
+	 $("#button_3").click(function() 
+	 {
+		var name= $("#show").val()
+			 
+	 	var fromCustomer={
+						"player_name" : "dummy",
+						"category" : "dummy",
+						"bestfigure": "dummy",
+						"highestscore": "dummy",
+						"team" : name
+						}
+		
+		var obj = JSON.stringify(fromCustomer);
+		//console.log(obj);
+		//duv.innerHTML=obj;
+		$.ajax({
+       
+        type: "POST",
+		contentType:'application/json;charset=utf-8',
+		 url: "http://localhost:8080/api/all",
+		dataType: 'json',
+        data: obj,
+       	success: function(result)
+			{
+				 var tr;
+				 var txt="<table border='1'><tr><th>Playername</th><th>Category</th><th>highestscore</th><th>bestfigure</th><th>Team</th></tr>"
+				 table=document.getElementById("myTable");
+				//console.log(result);
+				 duv=document.getElementById("demo");
+				 
+				 for(i=0;i<result.length;i++)
+				 {
+				
+				var myJsonString1 = JSON.stringify(result[i]);
+				var myJsonString=JSON.parse(myJsonString1);
+				if(myJsonString.playername==null && myJsonString.category!=null)
+					{
+						alert("Invalid team");
+						break;
+					}
+				txt+="<tr>"
+				txt += "<td>" + myJsonString.playername + "</td>";
+				txt += "<td>" + myJsonString.category + "</td>";
+				txt += "<td>" + myJsonString.highestscore + "</td>";
+				txt += "<td>" + myJsonString.bestfigure + "</td>";
+				txt += "<td>" + myJsonString.team + "</td>";
+				txt+="<tr>"
+				}
+				txt += "</table>"        
+				duv.innerHTML="";
+				duv.innerHTML=txt;
+				
+			}
+				      
+			
+	 
+	 
+	 
+	 
+	 });
+	});
+	
+	
+	
+})
+    </script>
+</head>
+<body>
+<div
+
+
+<p></p>
+<p><a href="text.html">Click here to go to Display page.</a></p>
+<p><input type="text" id="show"><br><button  id="button_3">Click to filter</button></p>
+<p id="demo">Player will be shown here</p>
+  
+</table>
+</body>
+
+</html>
+

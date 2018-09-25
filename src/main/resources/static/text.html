@@ -1,0 +1,99 @@
+<head>
+<style>
+input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+#button {
+    background-color: #45a049;
+	height: 30px;
+	width=50px;
+}
+</style>
+<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script>
+ 
+$( document ).ready(function() 
+{
+	 $("#button").click(function() 
+	 {   
+	 
+		var name= $("#playername").val()
+		var cat = $("#category").val()
+		var  bf = $("#bestfigure").val()
+		var hs =$("#highestscore").val()
+		var hs1 =$("#team").val()		
+	 	var fromCustomer={
+						"player_name" : name,
+						"category" : cat,
+						"bestfigure": bf,
+						"highestscore": hs,
+						"team": hs1
+						}
+		
+		var obj = JSON.stringify(fromCustomer);
+		
+		$.ajax({
+       
+        type: "POST",
+		contentType:'application/json;charset=utf-8',
+		 url: "http://localhost:8080/api/add",
+		dataType: 'json',
+        data: obj,
+		
+	success: function (result) {
+			 var tr;
+				 var txt="<table border='1'><tr><th>Playername</th><th>Category</th><th>highestscore</th><th>bestfigure</th><th>Team</th></tr>"
+				 table=document.getElementById("myTable");
+				//console.log(result);
+				 duv=document.getElementById("demo");
+				 
+				 
+				
+				var myJsonString1 = JSON.stringify(result[0]);
+				var myJsonString=JSON.parse(myJsonString1);
+				if(myJsonString.playername==null && myJsonString.category!=null)
+					{
+						alert(myJsonString.category);
+						
+					}
+					else
+					{
+					
+						alert("added at no : " + myJsonString.id);
+					}
+          
+        },
+        error: function () 
+		{
+		alert("unknown error");
+          
+          
+        }
+      });
+    });
+})	// funct
+
+    </script>
+</head>
+<body>
+<div style="width: 400px; height: 300px; top:300px; left=400px">
+<p><a href="new1.html">Click here to go to Display page.</a></p>
+  playername:<br> <input type="text" id="playername"><br>
+  category: <br><input type="text" id="category"><br>
+  highestscore: <br><input type="text" id="highestscore"><br>
+   bestfigure: <br><input type="text" id="bestfigure"><br>
+   team: <br><input type="text" id="team"><br>
+<button  id="button">Click to show all player1</button>
+
+</div>
+ 
+
+
+
+</body>
